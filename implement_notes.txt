@@ -1,0 +1,25 @@
+# Implementation Notes for VS Code Extension: SQL Test Case AI
+
+## 1. Project Scaffolding
+- Ran `yo code` in the terminal and answered all prompts:
+  - **Language:** TypeScript
+  - **Extension Name:** sql-testcase-ai
+  - **Description:** Generate Sql query testcases
+  - **Git:** Initialized a git repository
+  - **Bundler:** esbuild
+  - **Package Manager:** npm
+  - **Icon:** (default, can be set to built-in codicon or custom SVG/PNG later)
+- Project structure created in `sql-testcase-ai/` with all standard files (package.json, README.md, esbuild.js, tsconfig.json, src/extension.ts, etc.)
+
+## 2. Initial Extension Logic
+- Default command `sql-testcase-ai.helloWorld` registered in package.json and implemented in src/extension.ts.
+- Extension activates and shows a Hello World message when the command is run.
+
+## 3. Next Steps
+- Install dependencies with `npm install` (if not already done by generator).
+- Test build and run extension in VS Code (F5).
+- Begin implementing core features: file/folder selection, AI integration, PowerShell automation for Excel.
+
+---
+
+All choices and project details are now documented. Update this file as you implement new features or make further decisions.

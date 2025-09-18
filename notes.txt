@@ -1,0 +1,102 @@
+# VS Code Extension for DB Developers: AI-Powered SQL Test Case Generation and Excel Documentation
+
+## Project Overview
+You want to build a VS Code extension that:
+- Analyzes SQL and Python code in the current file or all files in a selected folder.
+- Uses AI (GitHub Copilot) to generate SQL test cases for code changes (DDL/DML, functions, procedures, anonymous blocks).
+- Automatically documents these test cases into an Excel file.
+- Uses PowerShell to create and update Excel files.
+- **Includes a custom icon** (either a built-in codicon or your own SVG/PNG) for the extension in VS Code.
+
+## Step-by-Step Implementation Plan (with Icon)
+
+### 1. Choose Programming Language
+- **TypeScript** is the recommended language for VS Code extensions. It has first-class support, strong typing, and best integration with VS Code APIs.
+
+### 2. Set Up Extension Project
+- Install Node.js (includes npm and npx).
+- Install Yeoman and VS Code Extension Generator globally:
+  ```
+  npm install -g yo generator-code
+  ```
+- Scaffold a new extension:
+  ```
+  yo code
+  ```
+  - Choose TypeScript
+  - Name your extension (e.g., "sql-testcase-ai")
+  - Add description and other metadata
+  - **
+  When prompted for an icon, you can specify a path to your SVG/PNG (e.g., `media/icon.svg`) or use a built-in codicon (e.g., `symbol-method`).**
+
+### 3. Add Icon to Your Extension
+- **Option 1: Use Built-in Codicon**
+  - In `package.json`, set:
+    ```json
+    "icon": "symbol-method"
+    ```
+- **Option 2: Use Custom Icon**
+  - Place your SVG/PNG icon in a folder (e.g., `media/icon.svg`).
+  - In `package.json`, set:
+    ```json
+    "icon": "media/icon.svg"
+    ```
+
+### 4. Implement Core Features
+- **Command 1:** Generate test cases for the current file
+- **Command 2:** Generate test cases for all files in a selected folder
+- Use VS Code API to get file/folder content
+- Use GitHub Copilot API (or OpenAI API) to generate SQL test cases from code
+- Use Node.js `child_process` to run PowerShell scripts for Excel operations
+
+### 5. PowerShell Integration for Excel
+- Write PowerShell scripts to:
+  - Create Excel files
+  - Add/append test case data (test name, SQL, description, etc.)
+- Call these scripts from your extension using Node.js
+
+### 6. Extension Activation & Commands
+- Register commands in `package.json`
+- Implement command handlers in `extension.ts`
+- Add context menu options for file/folder
+
+### 7. Testing & Documentation
+- Test extension in VS Code (F5 to launch Extension Development Host)
+- Document usage in `README.md`
+- Add code comments and usage notes
+
+### 8. Packaging & Publishing
+- Package extension with `vsce package`
+- Publish to VS Code Marketplace (optional)
+
+## Example Code Snippets
+
+### Registering a Command (TypeScript)
+```ts
+vscode.commands.registerCommand('sql-testcase-ai.generateForFile', async (uri) => {
+  // Get file content, call AI, run PowerShell, etc.
+});
+```
+
+### Running PowerShell from Node.js
+```ts
+import { exec } from 'child_process';
+exec('powershell -File ./scripts/writeToExcel.ps1 -TestCase "..."', (err, stdout, stderr) => {
+  // Handle output
+});
+```
+
+### PowerShell Script Example
+```powershell
+param(
+  [string]$TestCase
+)
+# Use ImportExcel module or COM objects to write to Excel
+```
+
+## Notes
+- Use TypeScript for extension logic, PowerShell for Excel automation.
+- Use VS Code API for file/folder selection and command registration.
+- Use AI API for test case generation.
+- Document every step and code line in this notes.txt file as you build.
+- **Include your icon in the extension manifest as described above.**
